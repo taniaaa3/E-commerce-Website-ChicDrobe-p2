@@ -32,13 +32,13 @@ const AddProduct = () => {
             for (const image of images) {
               formdata.append('file', image)
             }
-            await axios.post('http://192.168.1.109:3003/upload/images', formdata)
+            await axios.post('https://chicdrobe.onrender.com/upload/images', formdata)
             .then((res) => { 
               console.log(res.data.images); 
               product.image1 = `${res.data.images[0].filename}`
               product.image2 = `${res.data.images[1].filename}`
             }).then(()=>{
-              axios.post('http://192.168.1.109:3003/upload/product',product).then((res)=>{
+              axios.post('https://chicdrobe.onrender.com/upload/product',product).then((res)=>{
                     console.log(res);
                     alert('Product added');
   

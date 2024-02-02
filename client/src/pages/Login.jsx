@@ -28,7 +28,7 @@ const Login = () => {
     const login = async(e)=>{
         e.preventDefault();
         try {
-            await axios.post('http://192.168.1.109:3003/auth/login',userData).then((res)=>{
+            await axios.post('https://chicdrobe.onrender.com/auth/login',userData).then((res)=>{
                 if(res.status == 200){
                     storeToken(res.data.token);
                     navigate('/');

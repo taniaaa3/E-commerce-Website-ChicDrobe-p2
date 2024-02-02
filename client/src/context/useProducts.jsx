@@ -9,7 +9,7 @@ export const ProductProvider = ({children})=>{
     const [search, setSearch] = useState();
     const [searchProducts, setSearchProducts] = useState([]);
     const getAllProducts = async()=>{
-        await axios.get('http://192.168.1.109:3003/products/all').then((res)=>{
+        await axios.get('https://chicdrobe.onrender.com/products/all').then((res)=>{
             setProducts(res.data);
             setLoading(false);
         })

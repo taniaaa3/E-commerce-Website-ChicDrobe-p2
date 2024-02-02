@@ -111,7 +111,7 @@ const Payment = () => {
               onApprove={(data,actions)=>{
                 const {address,products,paymentMethod} = placeOrder
                 const orderID = data.orderID
-                axios.post('http://192.168.1.109:3003/order/place',{address, products,paymentMethod, orderID},{
+                axios.post('https://chicdrobe.onrender.com/order/place',{address, products,paymentMethod, orderID},{
                   headers: {"Authorization": `Bearer ${token}`}
                 }).then((res)=>{
                   console.log(res);
@@ -131,7 +131,7 @@ const Payment = () => {
                   let orderID = "Same as '_id'"
                   try {
                     const {address,products,paymentMethod} = placeOrder
-                    axios.post('http://192.168.1.109:3003/order/place',{address, products,paymentMethod, orderID},{
+                    axios.post('https://chicdrobe.onrender.com/order/place',{address, products,paymentMethod, orderID},{
                   headers: {"Authorization": `Bearer ${token}`}
                 }).then((res)=>{
                   console.log(res);

@@ -61,7 +61,7 @@ const ManageProducts = () => {
                         </td>
                         <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                           <button className=" rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900" 
-                          onClick={()=>{axios.delete(`http://192.168.1.109:3003/products/delete/${val._id}`)
+                          onClick={()=>{axios.delete(`https://chicdrobe.onrender.com/products/delete/${val._id}`)
                           .then((res)=>{toast(res.data.msg)})
                           .catch((err)=>{console.log(err);})}}>Delete</button>
                         </td>

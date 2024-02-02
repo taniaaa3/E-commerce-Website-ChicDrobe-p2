@@ -40,14 +40,14 @@ const ProductRedirect = () => {
     const [display, setDisplay] = useState();
     const params = useParams();
     const productFetch = async () => {
-        await axios.get(`http://192.168.1.109:3003/products/redirect/${params.id}`).then((res) => {
+        await axios.get(`https://chicdrobe.onrender.com/products/redirect/${params.id}`).then((res) => {
             setCurProduct(res.data.product);
             setLoading(false);
         }).catch((err) => { console.log(err); })
     }
     const checkWishlist = async () => {
         if (token) {
-            await axios.get(`http://192.168.1.109:3003/wishlist/check/${params.id}`, {
+            await axios.get(`https://chicdrobe.onrender.com/wishlist/check/${params.id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             }).then((res) => {
                 if (res.data.msg == "Product already exists in wishlist") {
@@ -73,7 +73,7 @@ const ProductRedirect = () => {
     }, [wishlist])
     const productExists = async () => {
         if (token) {
-            await axios.get(`http://192.168.1.109:3003/cart/checkcart/${params.id}`, {
+            await axios.get(`https://chicdrobe.onrender.com/cart/checkcart/${params.id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             }).then((res) => {
                 if (res.data.msg == "Product already exists in cart") {
@@ -91,7 +91,7 @@ const ProductRedirect = () => {
 
     const addToCart = async () => {
         if (token) {
-            await axios.post(`http://192.168.1.109:3003/cart/add/${curProduct._id}`, data, {
+            await axios.post(`https://chicdrobe.onrender.com/cart/add/${curProduct._id}`, data, {
                 headers: { "Authorization": `Bearer ${token}` }
             }).then((res) => {
                 console.log(res);
@@ -108,12 +108,12 @@ const ProductRedirect = () => {
     const wishlistProduct = async (id) => {
         if (token) {
             if (wishlist) {
-                await axios.delete('http://192.168.1.109:3003/wishlist/remove', id).then(() => {
+                await axios.delete('https://chicdrobe.onrender.com/wishlist/remove', id).then(() => {
                     setWishlist(false);
                 }).catch((err) => { console.log(err); })
             }
             else {
-                await axios.get(`http://192.168.1.109:3003/wishlist/add/${params.id}`, {
+                await axios.get(`https://chicdrobe.onrender.com/wishlist/add/${params.id}`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 }).then((res) => {
                     console.log(res);
@@ -130,7 +130,7 @@ const ProductRedirect = () => {
         const { productID, size, color, quantity } = data;
         if (productID && size && color) {
             try {
-                await axios.get(`http://192.168.1.109:3003/products/getproduct/${productID}`).then((res)=>{
+                await axios.get(`https://chicdrobe.onrender.com/products/getproduct/${productID}`).then((res)=>{
                     let product = res.data.product;
                     setPlaceOrder({ ...placeOrder, ["products"]: [{product, size, color, quantity}] });
                     console.log(placeOrder);

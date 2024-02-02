@@ -15,13 +15,13 @@ const Category = () => {
   })
 
   const fetchData = async()=>{
-    await axios.get("http://192.168.1.109:3003/products/getsizes").then((res)=>{
+    await axios.get("https://chicdrobe.onrender.com/products/getsizes").then((res)=>{
       setSizes(res.data.sizes);
     })
-    await axios.get("http://192.168.1.109:3003/products/getcolors").then((res)=>{
+    await axios.get("https://chicdrobe.onrender.com/products/getcolors").then((res)=>{
       setColors(res.data.colors);
     })
-    await axios.get("http://192.168.1.109:3003/products/gettype").then((res)=>{
+    await axios.get("https://chicdrobe.onrender.com/products/gettype").then((res)=>{
       setType(res.data.type);
     })
   }
@@ -32,7 +32,7 @@ const Category = () => {
 
     }
     useEffect(()=>{
-      axios.post("http://192.168.1.109:3003/products/filterproduct",search).then((res)=>{
+      axios.post("https://chicdrobe.onrender.com/products/filterproduct",search).then((res)=>{
         if(res.data.product.length != 0){
         setProducts(res.data.product);
         console.log(res.data.product);}
@@ -45,7 +45,7 @@ const Category = () => {
     const sort = async(e)=>{
       let value = e.target.value;
       const {type, colors, sizes} = search;
-      await axios.post("http://192.168.1.109:3003/products/sort",{value, type, colors, sizes}).then((res)=>{
+      await axios.post("https://chicdrobe.onrender.com/products/sort",{value, type, colors, sizes}).then((res)=>{
         if(res.data.data.length != 0){
         setProducts(res.data.data);
         console.log("calling");

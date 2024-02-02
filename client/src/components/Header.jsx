@@ -31,7 +31,7 @@ const Header = () => {
     const searchProduct = async()=>{
         if(search){
             setLoading(true);
-            await axios.post("http://192.168.1.109:3003/products/search",{search},{
+            await axios.post("https://chicdrobe.onrender.com/products/search",{search},{
                 headers: {"Content-Type":"application/json"}
             }).then((res)=>{
                     setSearchProducts(res.data.product);
@@ -45,7 +45,7 @@ const Header = () => {
         }
     }
     const fetchCart = async()=>{
-        await axios.get('http://192.168.1.109:3003/cart/get',{
+        await axios.get('https://chicdrobe.onrender.com/cart/get',{
             headers: {"Authorization":`Bearer ${token}`}
         }).then((res)=>{
             setCart(res.data.cart)

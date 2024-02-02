@@ -17,14 +17,14 @@ const User = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const getWishlist = async () => {
-      await axios.get('http://192.168.1.109:3003/wishlist/get', {
+      await axios.get('https://chicdrobe.onrender.com/wishlist/get', {
           headers: { "Authorization": `Bearer ${token}` }
       }).then((res) => {
           setWishlist(res.data.wishlist);
       }).catch((err) => { console.log(err); })
   }
   const fetchCart = async()=>{
-    await axios.get('http://192.168.1.109:3003/cart/get',{
+    await axios.get('https://chicdrobe.onrender.com/cart/get',{
         headers: {"Authorization":`Bearer ${token}`}
     }).then((res)=>{
         setProducts(res.data.cart)

@@ -14,7 +14,7 @@ export const OrderProvider = ({children})=>{
     const {token} = useAuth();
     const orderHistory = async()=>{
         try {
-            await axios.get("http://192.168.1.109:3003/order/myorders",{
+            await axios.get("https://chicdrobe.onrender.com/order/myorders",{
                 headers: {"Authorization":`Bearer ${token}`}
             }).then((res)=>{
                 setOrders(res.data.orders);
@@ -27,7 +27,7 @@ export const OrderProvider = ({children})=>{
     }
     const adminPanelOrders = async()=>{
         try {
-            await axios.get("http://192.168.1.109:3003/order/allorders",{
+            await axios.get("https://chicdrobe.onrender.com/order/allorders",{
                 headers: {"Authorization":`Bearer ${token}`}
             }).then((res)=>{
                 setOrders(res.data.orders);
@@ -40,7 +40,7 @@ export const OrderProvider = ({children})=>{
     }
     const allOrders = async()=>{
         try {
-            await axios.get("http://192.168.1.109:3003/order/myorders",{
+            await axios.get("https://chicdrobe.onrender.com/order/myorders",{
                 headers: {"Authorization":`Bearer ${token}`}
             }).then((res)=>{
                 setOrders(res.data.orders);

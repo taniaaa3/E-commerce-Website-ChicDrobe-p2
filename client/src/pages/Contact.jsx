@@ -22,7 +22,7 @@ const Contact = () => {
       e.preventDefault();
       const {name, email, message} = contact;
       if(name && email && message){
-      axios.post('http://192.168.1.109:3003/connect/contact',contact).then((res)=>{
+      axios.post('https://chicdrobe.onrender.com/connect/contact',contact).then((res)=>{
           console.log(res.data);
           notify('Message Sent')
           setContact({

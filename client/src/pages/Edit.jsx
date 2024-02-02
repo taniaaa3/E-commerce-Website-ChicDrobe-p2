@@ -24,7 +24,7 @@ const Edit = () => {
     const updateUser = async(e)=>{
         e.preventDefault();
         try {
-            let res = await axios.put('http://192.168.1.109:3003/edit/user',{
+            let res = await axios.put('https://chicdrobe.onrender.com/edit/user',{
                 email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName

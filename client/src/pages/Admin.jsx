@@ -41,7 +41,7 @@ const Admin = () => {
     setActive(orders.filter((val) => {
       return val.status == "Active";
     }).length)
-    axios.get('http://192.168.1.109:3003/edit/allusers').then((res) => {
+    axios.get('https://chicdrobe.onrender.com/edit/allusers').then((res) => {
       setUsers(res.data.users);
     }).catch((err) => { console.log(err) })
   })

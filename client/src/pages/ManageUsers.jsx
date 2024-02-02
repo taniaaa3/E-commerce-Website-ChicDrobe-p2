@@ -11,7 +11,7 @@ const ManageUsers = () => {
   
 
   useEffect(() => {
-      axios.get('http://192.168.1.109:3003/edit/allusers').then((res)=>{
+      axios.get('https://chicdrobe.onrender.com/edit/allusers').then((res)=>{
           setUsers(res.data.users);
           console.log(res.data.users);
           setLoading(false);
@@ -64,7 +64,7 @@ const ManageUsers = () => {
                     </td>
                       <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                         <button className=" rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900" onClick={async()=>{
-                          await axios.delete(`http://192.168.1.109:3003/admin/deluser/${val._id}`).then((res)=>{
+                          await axios.delete(`https://chicdrobe.onrender.com/admin/deluser/${val._id}`).then((res)=>{
                             toast.success("User deleted");
                             console.log(res);
                           }).catch((err)=>{toast.error(err.message)})

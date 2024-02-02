@@ -22,7 +22,7 @@ const Shipping = () => {
   const [toggle, setToggle] = useState(true);
   // To get addresses
   const getAddresses = async () => {
-    await axios.get('http://192.168.1.109:3003/edit/getaddresses', {
+    await axios.get('https://chicdrobe.onrender.com/edit/getaddresses', {
       headers: { "Authorization": `Bearer ${token}` }
     }).then((res) => {
       setSavedAddresses(res.data.addresses);
@@ -31,7 +31,7 @@ const Shipping = () => {
 
   const saveAddress = async (e) => {
     e.preventDefault();
-    await axios.post('http://192.168.1.109:3003/edit/saveaddress', address, {
+    await axios.post('https://chicdrobe.onrender.com/edit/saveaddress', address, {
       headers: { "Authorization": `Bearer ${token}` }
     }).then((res) => {
       console.log(res.data);

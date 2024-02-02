@@ -25,7 +25,7 @@ const SavedAddresses = () => {
 
   // To get addresses
   const getAddresses = async () => {
-    await axios.get('http://192.168.1.109:3003/edit/getaddresses', {
+    await axios.get('https://chicdrobe.onrender.com/edit/getaddresses', {
       headers: { "Authorization": `Bearer ${token}` }
     }).then((res) => {
       setAddress(res.data.addresses);
@@ -38,7 +38,7 @@ const SavedAddresses = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.patch('http://192.168.1.109:3003/edit/updateaddress', update, {
+      await axios.patch('https://chicdrobe.onrender.com/edit/updateaddress', update, {
         headers: { "Authorization": `Bearer ${token}` }
       }).then((res) => {
         toast(res.data.msg);
@@ -73,7 +73,7 @@ const SavedAddresses = () => {
   // To delete address
   const deleteAddress = async (id) => {
     try {
-      await axios.delete(`http://192.168.1.109:3003/edit/deleteaddress/${id}`).then((res) => {
+      await axios.delete(`https://chicdrobe.onrender.com/edit/deleteaddress/${id}`).then((res) => {
         toast('Address deleted');
       }).catch((err) => {
         toast.error('Address not deleted')

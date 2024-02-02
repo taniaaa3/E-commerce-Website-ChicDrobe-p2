@@ -16,7 +16,7 @@ const ForgetPassword = () => {
         e.preventDefault();
         if(email){
             try {
-                await axios.post('http://192.168.1.109:3003/auth/sendmail',{email}).then((res)=>{
+                await axios.post('https://chicdrobe.onrender.com/auth/sendmail',{email}).then((res)=>{
                     console.log(res);
                     localStorage.setItem("OTP",res.data.otp);
                     setOtp(res.data.otp);
@@ -50,7 +50,7 @@ const ForgetPassword = () => {
         e.preventDefault();
         try {
             if(newPass == rePass){
-            await axios.post('http://192.168.1.109:3003/auth/resetpassword',{email, password: newPass}).then((res)=>{
+            await axios.post('https://chicdrobe.onrender.com/auth/resetpassword',{email, password: newPass}).then((res)=>{
                 console.log(res.data);
                 toast.success("Password Reset Successfully");
                 navigate('/login');

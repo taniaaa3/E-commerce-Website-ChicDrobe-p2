@@ -20,7 +20,7 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
   const params = useParams();
     const productFetch = async () => {
-        await axios.get(`http://192.168.1.109:3003/products/redirect/${params.id}`).then((res) => {
+        await axios.get(`https://chicdrobe.onrender.com/products/redirect/${params.id}`).then((res) => {
             setProduct(res.data.product);
         }).catch((err) => { console.log(err); })
     }
@@ -36,7 +36,7 @@ const UpdateProduct = () => {
       
       try {
           try {
-            await axios.patch(`http://192.168.1.109:3003/products/update/${params.id}`,{title, price, description, stock}).then((res)=>{
+            await axios.patch(`https://chicdrobe.onrender.com/products/update/${params.id}`,{title, price, description, stock}).then((res)=>{
                 toast(res.data.msg);
             }).catch((err)=>{console.log(err);})
           } catch (error) {

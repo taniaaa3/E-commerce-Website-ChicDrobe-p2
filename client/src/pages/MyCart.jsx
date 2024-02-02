@@ -13,7 +13,7 @@ const MyCart = () => {
     const navigate = useNavigate();
     const fetchCart = async () => {
 
-        await axios.get('http://192.168.1.109:3003/cart/get', {
+        await axios.get('https://chicdrobe.onrender.com/cart/get', {
             headers: { "Authorization": `Bearer ${token}` }
         }).then((res) => {
             setProducts(res.data.cart)
@@ -22,7 +22,7 @@ const MyCart = () => {
         }).catch((err) => { console.log(err); })
     }
     const deleteItem = async (id) => {
-        await axios.delete('http://192.168.1.109:3003/cart/remove', id).then(() => {
+        await axios.delete('https://chicdrobe.onrender.com/cart/remove', id).then(() => {
             toast('Item deleted');
         }).catch(() => {
             toast('Item not deleted')

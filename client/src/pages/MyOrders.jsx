@@ -15,7 +15,7 @@ const MyOrders = ({ userData }) => {
     //     ))
     })
     const cancelOrder = async (orderID) => {
-        await axios.put(`http://192.168.1.109:3003/order/cancelorder`, { orderID }).then((res) => {
+        await axios.put(`https://chicdrobe.onrender.com/order/cancelorder`, { orderID }).then((res) => {
             console.log(res);
             adminPanelOrders();
             toast.success(res.data.msg);

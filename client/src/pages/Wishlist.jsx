@@ -12,7 +12,7 @@ const Wishlist = () => {
     const { token } = useAuth();
     const navigate = useNavigate();
     const getWishlist = async () => {
-        await axios.get('http://192.168.1.109:3003/wishlist/get', {
+        await axios.get('https://chicdrobe.onrender.com/wishlist/get', {
             headers: { "Authorization": `Bearer ${token}` }
         }).then((res) => {
             setWishlist(res.data.wishlist);
@@ -20,7 +20,7 @@ const Wishlist = () => {
         }).catch((err) => { console.log(err); })
     }
     const removeWishlist = async (id) => {
-        await axios.delete('http://192.168.1.109:3003/wishlist/remove', id).then(() => {
+        await axios.delete('https://chicdrobe.onrender.com/wishlist/remove', id).then(() => {
             toast('Item removed')
         }).catch((err) => { console.log(err); })
     }
