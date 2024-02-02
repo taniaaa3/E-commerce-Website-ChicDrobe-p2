@@ -7,6 +7,7 @@ route.route('/user').put(userControllers.editUser);
 route.route('/saveaddress').post(authMiddleware, userControllers.saveAddress);
 route.route('/getaddresses').get(authMiddleware, userControllers.getAddress);
 route.route('/updateaddress').patch(authMiddleware, userControllers.updateAddress);
-route.route('/deleteaddress/:id').delete(userControllers.deleteAddress)
+route.route('/deleteaddress/:id').delete(userControllers.deleteAddress);
+route.route('/allusers').get(userControllers.allUsers)
 
 module.exports = route;

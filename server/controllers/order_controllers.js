@@ -1,36 +1,63 @@
 const Order = require('../models/orderModel');
 
-const place = async(req,res)=>{
-    const {address, products, paymentMethod} = req.body;
+const place = async (req, res) => {
+    const { address, products, paymentMethod, orderID } = req.body;
     const userID = req.userID;
     try {
-        if(address && paymentMethod && products && userID){
-            const orderPlaced = await Order.create({address, products, paymentMethod, userID});
-            res.status(200).json({msg: 'order placed successfully', orderPlaced});
+        if (address && paymentMethod && products && userID && orderID) {
+            const orderPlaced = await Order.create({ address, products, paymentMethod, userID, orderID });
+            res.status(200).json({ msg: 'order placed successfully', orderPlaced });
         }
-        else{
-            res.status(400).json({msg: 'one or more fields empty'});
+        else {
+            res.status(400).json({ msg: 'one or more fields empty' });
         }
     } catch (error) {
-        res.status(400).json({error});
+        res.status(400).json({ error });
     }
 }
 
-const cancel = async(req,res)=>{
+const cancel = async (req, res) => {
 
 }
 
-const getOrders = async(req,res)=>{
+const myOrders = async (req, res) => {
     const userID = req.userID;
     try {
-        const orders = await Order.find({userID});
+        const orders = await Order.find({ userID });
+        res.status(200).json({ orders });
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+}
+
+const allOrders = async(req,res)=>{
+    const isAdmin = req.user.isAdmin;
+    if(isAdmin){
+        try {
+            const orders = await Order.find({});
         res.status(200).json({orders});
+        } catch (error) {
+            res.status(400).json({error});
+        }
+        
+    }
+    else{
+        res.status(400).json({msg : "user isn't admin."})
+    }
+}
+
+// To cancel an order 
+const cancelOrder = async(req,res)=>{
+    const {orderID} = req.body;
+    try {
+        const cancel = await Order.findOneAndUpdate({orderID},{status: "Cancelled"});
+        res.status(200).json({msg: "Order Cancelled", cancel})
     } catch (error) {
         res.status(400).json({error});
     }
 }
 
-module.exports = {place, cancel, getOrders}
+module.exports = { place, cancel, myOrders, allOrders, cancelOrder }
 
 
 

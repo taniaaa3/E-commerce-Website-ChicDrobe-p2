@@ -17,11 +17,12 @@ const getCart = async(req,res)=>{
 
 // To add products in cart
 const addToCart = async(req,res)=>{
-    const {id} = req.params;
+    const {productID, size, color, quantity} = req.body;
     try {
-        let product = await Product.findById(id);
+        const cartItem = await Product.findOne({_id: productID});
+        const product = {cartItem, size, color, quantity}
         const userID = req.user._id;
-        const cart = await Cart.create({products: product, userID})
+        const cart = await Cart.create({products: [product], userID})
         res.status(200).json({cart});
     } catch (error) {
         res.status(400).json({error});
@@ -45,7 +46,7 @@ const updateQuantity = async(req,res)=>{
     try {
         const productIdObject = new ObjectId(id);
         const userID = req.userID;
-        const update = await Cart.updateOne({"products._id": productIdObject, userID}, {quantity})
+        const update = await Cart.updateOne({"products.cartItem._id": productIdObject, userID}, {quantity})
         res.status(200).json({update});
     } catch (error) {
         res.status(400).json({error});
@@ -59,7 +60,7 @@ const checkInCart = async (req, res) => {
         const { id } = req.params;
         const productIdObject = new ObjectId(id);
         const userID = req.userID;
-        const cartItem = await Cart.findOne({ "products._id": productIdObject, userID });
+        const cartItem = await Cart.findOne({ "products.cartItem._id": productIdObject, userID });
 
         if (cartItem) {
             res.status(200).json({ msg: 'Product already exists in cart' });

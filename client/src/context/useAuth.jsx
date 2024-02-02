@@ -17,7 +17,7 @@ export const AuthProvider = ({children})=>{
         setUserData({});
     }
     const fetchUser = async()=>{
-        axios.get('http://localhost:3003/auth/user',{
+        axios.get('http://192.168.1.109:3003/auth/user',{
             headers: {"Authorization":`Bearer ${token}`}
         }).then((res)=>{
             setUserData(res.data.userData);

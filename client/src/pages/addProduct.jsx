@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { useAuth } from '../context/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -13,7 +15,8 @@ const AddProduct = () => {
     stock: ''
   })
   const [images, setImages] = useState([]);
-
+  const {userData} = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,13 +32,13 @@ const AddProduct = () => {
             for (const image of images) {
               formdata.append('file', image)
             }
-            await axios.post('http://localhost:3003/upload/images', formdata)
+            await axios.post('http://192.168.1.109:3003/upload/images', formdata)
             .then((res) => { 
               console.log(res.data.images); 
               product.image1 = `${res.data.images[0].filename}`
               product.image2 = `${res.data.images[1].filename}`
             }).then(()=>{
-              axios.post('http://localhost:3003/upload/product',product).then((res)=>{
+              axios.post('http://192.168.1.109:3003/upload/product',product).then((res)=>{
                     console.log(res);
                     alert('Product added');
   
@@ -59,26 +62,32 @@ const AddProduct = () => {
     }
   }
 
+  useEffect(()=>{
+    if(!userData.isAdmin){
+      navigate('/');
+    }
+  })
+
   return (
     <div className="home h-[1000px]">
       <div className="login w-full h-full flex flex-col justify-center items-center">
         <form onSubmit={handleSubmit} name='productForm' className="form w-5/6 sm:w-2/3 md:w-1/2 px-5 py-5 rounded-lg flex flex-col justify-center items-left">
           <h1 className="self-center m-2 text-2xl font-bold">Add Product</h1>
-          <label htmlFor="title" className="pl-2 font-medium">Title</label>
+          <label htmlhtmlFor="title" className="pl-2 font-medium">Title</label>
           <input name="title" className="m-2 px-3 py-1" placeholder="Enter product's title" type="text" required onChange={(e) => { setProduct({ ...product, 'title': e.target.value }) }} />
-          <label htmlFor="price" className="pl-2 font-medium">Price</label>
+          <label htmlhtmlFor="price" className="pl-2 font-medium">Price</label>
           <input name="price" className="m-2 px-3 py-1" placeholder="Enter product's price" type="number" required onChange={(e) => { setProduct({ ...product, 'price': e.target.value }) }} />
-          <label htmlFor="description" className="pl-2 font-medium">Description</label>
+          <label htmlhtmlFor="description" className="pl-2 font-medium">Description</label>
           <textarea name="description" className="m-2 px-3 py-1" cols={10} rows={5} style={{ resize: "none" }} placeholder="Enter product's description" required onChange={(e) => { setProduct({ ...product, 'description': e.target.value }) }} />
-          <label htmlFor="image1" className="pl-2 font-medium">Product Image 1</label>
+          <label htmlhtmlFor="image1" className="pl-2 font-medium">Product Image 1</label>
           <input name="image1" className="m-2 px-3 py-1" placeholder="Enter product's image" type="file" required onChange={(e) => { setImages([...images, e.target.files[0]]) }} />
-          <label htmlFor="image2" className="pl-2 font-medium">Product Image 2</label>
+          <label htmlhtmlFor="image2" className="pl-2 font-medium">Product Image 2</label>
           <input id="image2" name="password" className="m-2 px-3 py-1" placeholder="Enter product's image" type="file" required onChange={(e) => { setImages([...images, e.target.files[0]]) }} />
 
 
 
 
-          <label htmlFor="category" className="pl-2 font-medium">Category</label>
+          <label htmlhtmlFor="category" className="pl-2 font-medium">Category</label>
           <select name="category" className="m-2 px-3 py-1" id="" required onChange={(e) => { 
             setProduct({ ...product, 'category': e.target.value });
             }}>
@@ -88,7 +97,7 @@ const AddProduct = () => {
             <option value="Kids">Kids</option>
           </select>
 
-          <label htmlFor="type" className="pl-2 font-medium">Type</label>
+          <label htmlhtmlFor="type" className="pl-2 font-medium">Type</label>
           {product.category == 'Men' ? <select name="category" className="m-2 px-3 py-1" required id="" onChange={(e) => { setProduct({ ...product, 'type': e.target.value }) }}>
           <option selected disabled>Select Type</option>
             <option value="shirts">Shirts</option>
@@ -111,7 +120,7 @@ const AddProduct = () => {
               : <select name="category" className="m-2 px-3 py-1" required id="" onChange={(e) => { setProduct({ ...product, 'type': e.target.value }) }}>
               <option value="" disabled selected> Choose category first </option>
             </select>}
-          <label htmlFor="stock" className="pl-2 font-medium">Stock</label>
+          <label htmlhtmlFor="stock" className="pl-2 font-medium">Stock</label>
           <input name="stock" className="m-2 px-3 py-1" placeholder="Enter product's price" type="number" required onChange={(e) => { setProduct({ ...product, 'stock': e.target.value }) }} />
 
 

@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 route.route('/get').get(authMiddleware, cartControllers.getCart);
 
 // To add products in cart
-route.route('/add/:id').get(authMiddleware, cartControllers.addToCart);
+route.route('/add/:id').post(authMiddleware, cartControllers.addToCart);
 
 // To delete products from cart
 route.route('/remove').delete(cartControllers.deleteProductFromCart);

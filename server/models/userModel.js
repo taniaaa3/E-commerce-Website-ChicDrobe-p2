@@ -57,9 +57,20 @@ userSchema.methods.generateToken = async function(){
     }
 }
 
+// Password compare at time of login
 userSchema.methods.comparePassword = async function(password){
     try {
         return bcrypt.compare(password,this.password);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Password reset
+userSchema.methods.resetPassword = async function(password){
+    try {
+        const newPassword = await bcrypt.hash(password,10);
+        return newPassword;
     } catch (error) {
         console.log(error);
     }

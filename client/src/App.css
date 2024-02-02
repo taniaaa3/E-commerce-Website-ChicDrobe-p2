@@ -115,10 +115,6 @@
   }
   
   /* User page sidebar */
-  .glassmorphism{
-      border-right: #CDB4DB 2px solid;
-      padding: 15px;
-    }
     .sidebar{
       border-bottom: #CDB4DB solid 2px;
     }
@@ -128,5 +124,10 @@
     }
 
 
-    /* Rating Hover Effect */
-    
+    /* Admin panel sidebar */
+    .admin.active{
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      
+    }

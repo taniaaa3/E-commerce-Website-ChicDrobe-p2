@@ -39,10 +39,11 @@ const getAddress = async(req,res)=>{
 
 // To update address
 const updateAddress = async(req,res)=>{
-    const {id, fullName, address1, address2, phoneNumber, city, state} = req.body;
+    const {_id, fullName, address1, address2, phoneNumber, city, state, pincode} = req.body;
+    const userID = req.userID
     try {
-        const update = await Address.findOneAndUpdate({_id: id},{fullName, address1, address2, phoneNumber, city, state});
-        res.status(200).json({update})
+        const updated = await Address.findOneAndUpdate({_id},{fullName, phoneNumber, address1, address2, city, state, pincode, userID});
+        res.status(200).json({msg: "Address Updated", updated})
     } catch (error) {
         res.status(400).json({error})
     }
@@ -59,4 +60,14 @@ const deleteAddress = async(req,res)=>{
     }
 }
 
-module.exports = {editUser, saveAddress, getAddress, updateAddress, deleteAddress}
+// To get all users : Admin Panel
+const allUsers = async(req,res)=>{
+    try {
+        const users = await User.find();
+        res.status(200).json({users});
+    } catch (error) {
+        res.status(400).json({error});
+    }
+}
+
+module.exports = {editUser, saveAddress, getAddress, updateAddress, deleteAddress, allUsers}
