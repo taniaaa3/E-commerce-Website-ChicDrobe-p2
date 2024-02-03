@@ -6,7 +6,7 @@ import { faTruck, faCalendar, faIdBadge } from '@fortawesome/free-solid-svg-icon
 const Home = () => {
   const {token, userData, fetchUser} = useAuth();
   const guarantees = [
-    { id: 1, details: "COD Available. For real.", icon: faTruck },
+    { id: 1, details: "COD Available", icon: faTruck },
     { id: 2, details: "No questions asked returns", icon: faIdBadge },
     { id: 3, details: "7 days return", icon: faCalendar },
   ]
