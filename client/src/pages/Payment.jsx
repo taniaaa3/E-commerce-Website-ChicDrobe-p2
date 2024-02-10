@@ -51,7 +51,7 @@ const Payment = () => {
     axios.get('https://api.currencyapi.com/v3/latest?apikey=cur_live_9j9tWGC2kgnhgBeabUKrYCIurq0KoJ90LBXhBfpM&currencies=USD&base_currency=INR').then((res)=>{
       setUSD(Math.ceil(price * res.data.data.USD.value))})
       console.log(USD);
-  },[])
+  })
 
 
   return (
