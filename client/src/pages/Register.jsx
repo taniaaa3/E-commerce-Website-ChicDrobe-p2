@@ -17,6 +17,7 @@ const Register = () => {
     const [userOtp, setUserOtp] = useState();
     const { storeToken, token } = useAuth();
     const navigate = useNavigate();
+    const [registerLoading, setRegisterLoading] = useState(false);
     const handleChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -86,6 +87,7 @@ const Register = () => {
         }
         else {
             try {
+                setRegisterLoading(true);
                 await axios.post('https://chicdrobe.onrender.com/auth/register', userData).then((res) => {
                     setUserData({
                         firstName: '',
@@ -97,10 +99,12 @@ const Register = () => {
                     console.log(res);
                     storeToken(res.data.token);
                     notify('user registration successful');
+                    setRegisterLoading(false);
                     navigate('/')
                 }).catch((error) => {
                     console.log(error);
                     warn(error.response.data.msg);
+                    setRegisterLoading(false);
                 })
             }
             catch (err) {
@@ -135,7 +139,7 @@ const Register = () => {
                         <input name="phoneNumber" className="m-2 px-3 py-1" placeholder="Enter Your Phone Number" type="number" onChange={(e) => { handleChange(e) }} required value={userData.phoneNumber} />
                         <label htmlhtmlFor="pass" className="pl-2 font-medium">Password:</label>
                         <input id="pass" name="password" className="m-2 px-3 py-1" placeholder="Enter Your Password" type="password" onChange={(e) => { handleChange(e) }} required value={userData.password} />
-                        <button className=" self-center m-3 px-3 py-1 text-xl font-semibold rounded-lg" type='submit'>Register</button>
+                        <button className=" self-center m-3 px-3 py-1 text-xl font-semibold rounded-lg" type='submit'>{registerLoading ? "Registering..." : "Register"}</button>
                     </form>}
             </div>
         </div>
