@@ -37,7 +37,7 @@ const Login = () => {
                     setLoginLoading(false);
                     notify('Login successful')
                 }
-            }).catch((error)=>{warn('Invalid Credentials'); console.log(error);})
+            }).catch((error)=>{warn('Invalid Credentials'); setLoginLoading(false); console.log(error);})
         } catch (error) {
             console.log(error);
         }
