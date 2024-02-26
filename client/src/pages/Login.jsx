@@ -9,6 +9,7 @@ const Login = () => {
         email: '',
         password: ''
     })
+    const [loginLoading, setLoginLoading] = useState(false);
     const {storeToken} = useAuth();
     const navigate = useNavigate();
     const handleChange = (e)=>{
@@ -28,11 +29,12 @@ const Login = () => {
     const login = async(e)=>{
         e.preventDefault();
         try {
+            setLoginLoading(true);
             await axios.post('https://chicdrobe.onrender.com/auth/login',userData).then((res)=>{
                 if(res.status == 200){
                     storeToken(res.data.token);
                     navigate('/');
-                    // alert('login successful')
+                    setLoginLoading(false);
                     notify('Login successful')
                 }
             }).catch((error)=>{warn('Invalid Credentials'); console.log(error);})
@@ -51,7 +53,7 @@ const Login = () => {
                 <label htmlhtmlFor="pass" className="pl-2 font-medium">Password:</label>
                 <input id="pass" className="m-2 px-3 py-1" placeholder="Enter Your Password" type="password" onChange={(e)=>{handleChange(e)}} required name='password'/>
                 <Link to="/forgetpassword" className='text-xs self-end border-2 border-purple-400 p-1 rounded-sm font-bold'>Forgot password?</Link>
-                <button className=" self-center m-3 px-3 py-1 text-xl font-semibold rounded-lg" type='submit'>Login</button>
+                <button className={`self-center m-3 px-3 py-1 text-xl font-semibold rounded-lg`} {loginLoading ? "disabled" : ""} type='submit'>{loginLoading ? "Logging in" : "Login"}</button>
             </form>
         </div>
     </div>
